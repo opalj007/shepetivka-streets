@@ -1,0 +1,16 @@
+{
+  "name": "streets",
+  "version": "1.0.0",
+  "description": "Browse renamed streets",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel src/index.html",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Oleksandr Palianytsia",
+  "license": "ISC",
+  "devDependencies": {
+    "http-proxy-middleware": "^2.0.6",
+    "parcel": "^2.8.3"
+  }
+}

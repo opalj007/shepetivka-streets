@@ -1,0 +1,78 @@
+body {
+    background-color: #bbb
+}
+
+h1 {
+    text-align: center;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+.streets {
+    width: 96%;
+    margin: 0 auto;
+}
+
+.streets td, .streets th {
+    border: solid 1px #222;
+}
+
+.streets thead > tr > th:nth-child(1) {
+    width: 16%;
+}
+
+.streets thead > tr > th:nth-child(2) {
+    width: 7%;
+}
+
+.streets thead > tr > th:nth-child(3) {
+    width: 32%;
+}
+
+.streets thead > tr > th:nth-child(4) {
+    width: 32%;
+}
+
+.streets thead > tr > th:nth-child(5) {
+    width: 8%;
+}
+
+.streets thead > tr > th:nth-child(6) {
+    width: 5%;
+}
+
+.streets tbody > tr > td:nth-child(1) {
+    width: 16%;
+}
+
+.streets tbody > tr > td:nth-child(2) {
+    width: 7%;
+}
+
+.streets tbody > tr > td:nth-child(3) {
+    width: 32%;
+}
+
+.streets tbody > tr > td:nth-child(4) {
+    width: 32%;
+}
+
+.streets tbody > tr > td:nth-child(5) {
+    width: 8%;
+    text-align: center;
+}
+
+.streets tbody > tr > td:nth-child(6) {
+    width: 5%;
+    text-align: center;
+}
+
+.streets tbody > tr > td:has(input) {
+    text-align: center;
+}
+
+.streets tbody > tr > td > input {
+    width: 90%;
+}
