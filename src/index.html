@@ -7,12 +7,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Вулиці</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="main.css">
-    <script type="text/javascript" src="main.js"></script>
+    <script type="module" src="main.js"></script>
 </head>
 <body>
     <h1>Перейменовані топонімічні об'єкти</h1>
-    <table class="streets">
+    <table class="table" id="streets">
         <thead>
             <tr>
                 <th>Населений пункт</th>
@@ -24,7 +23,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr id="filter">
+            <tr class="table-primary" id="filter">
                 <td><input name="pos" type="text"/></td>
                 <td><input name="objtype" type="text"/></td>
                 <td><input name="old_name" type="text"/></td>
@@ -32,11 +31,6 @@
                 <td></td>
                 <td></td>
             </tr>
-        </tbody>
-    </table>
-    <table class="streets" id="data">
-        <tbody>
-
         </tbody>
     </table>
 </body>

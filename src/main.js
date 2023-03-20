@@ -1,3 +1,6 @@
+// import * as bootstrap from 'bootstrap';
+import '../scss/main.scss';
+
 document.addEventListener("DOMContentLoaded", function() {
     let data;
     
@@ -24,13 +27,16 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 function populate_table(data) {
-    const table_body  = document.querySelector("#data tbody");
-    table_body.innerHTML = ''
+    document.querySelectorAll("#streets tbody tr").forEach( tr => {
+        if (tr.getAttribute("id") !== "filter") tr.remove();
+    });
+    const tbody = document.querySelector("#streets tbody");
     data.forEach( row => {
-        let html = "<tr>";
-        html += "<td>" + row.pos + "</td><td>" + row.objtype + "</td><td>" + row.old_name + "</td><td>" + row.new_name + "</td><td>" + row.rename_date + "</td>";
+        const tr = document.createElement("tr");
+        tr.className = "table-success";
+        let html = "<td>" + row.pos + "</td><td>" + row.objtype + "</td><td>" + row.old_name + "</td><td>" + row.new_name + "</td><td>" + row.rename_date + "</td>";
         html += "<td>" + (row.applied ? "Yes" : "No") + "</td>";
-        html += "</tr>";
-        table_body.innerHTML += html;
+        tr.innerHTML = html;
+        tbody.appendChild(tr);
     });
 }
