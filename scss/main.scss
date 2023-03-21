@@ -2,6 +2,13 @@ $body-bg: #bbb;
 @import "../node_modules/bootstrap/scss/bootstrap";
 
 
+#streets {
+    background-color: aliceblue;
+    .form-control {
+        background-color: #fff;
+    }
+}
+
 // h1 {
 //     text-align: center;
 // }

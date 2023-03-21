@@ -2,9 +2,13 @@
   "name": "streets",
   "version": "1.0.0",
   "description": "Browse renamed streets",
-  "main": "index.js",
+  "source": "src/index.html",
+  "browserslist": "> 0.5%, last 2 versions, not dead",
   "scripts": {
     "start": "parcel src/index.html",
+    "clean": "rm -rf dist && mkdir dist",
+    "copy-assets": "cp -r assets/* dist/",
+    "build": "npm run clean && npm run copy-assets && parcel build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Oleksandr Palianytsia",

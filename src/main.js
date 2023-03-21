@@ -33,7 +33,7 @@ function populate_table(data) {
     const tbody = document.querySelector("#streets tbody");
     data.forEach( row => {
         const tr = document.createElement("tr");
-        tr.className = "table-success";
+        tr.className = "table-secondary";
         let html = "<td>" + row.pos + "</td><td>" + row.objtype + "</td><td>" + row.old_name + "</td><td>" + row.new_name + "</td><td>" + row.rename_date + "</td>";
         html += "<td>" + (row.applied ? "Yes" : "No") + "</td>";
         tr.innerHTML = html;
