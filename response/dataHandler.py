@@ -20,7 +20,7 @@ class DataHandler(RequestHandler):
         if table == 'streets':
             self.select_sql = '''
 select
-    pos, objtype, old_name, new_name, rename_date, applied
+    id, pos, objtype, old_name, new_name, rename_date, applied
 from streets
 order by pos, old_name
 '''
