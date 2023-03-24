@@ -17,10 +17,10 @@ class StaticHandler(RequestHandler):
         extension = split_path[1]
 
         try:
-            if extension in (".jpg", ".jpeg", ".png", ".ico", ".js"):
+            if extension in (".jpg", ".jpeg", ".png", ".ico"):
                 self.contents = open("dist/{}".format(file_path), 'rb')
             else:
-                self.contents = open("dist/{}".format(file_path), 'r')
+                self.contents = open("dist/{}".format(file_path), 'r', encoding='UTF-8')
             
             self.setContentType(self.filetypes[extension])
             self.setStatus(200)

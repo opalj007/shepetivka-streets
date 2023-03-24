@@ -7,7 +7,7 @@ class TemplateHandler(RequestHandler):
 
     def find(self, filename):
         try:
-            template_file = open('dist/{}'.format(filename), 'rb')
+            template_file = open('dist/{}'.format(filename), 'r', encoding='UTF-8')
             self.contents = template_file
             self.setStatus(200)
             return True
