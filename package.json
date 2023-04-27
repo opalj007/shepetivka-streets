@@ -1,13 +1,18 @@
 {
   "name": "streets",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Browse renamed streets",
   "source": "src/index.html",
+  "targets": {
+    "default": {
+      "distDir": "./static"
+    }
+  },
   "browserslist": "> 0.5%, last 2 versions, not dead",
   "scripts": {
     "start": "parcel src/index.html",
-    "clean": "rm -rf dist && mkdir dist",
-    "copy-assets": "cp -r assets/* dist/",
+    "clean": "rm -rf static && mkdir static",
+    "copy-assets": "cp -r assets/* static/",
     "build": "npm run clean && npm run copy-assets && parcel build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
