@@ -43,4 +43,4 @@ order by pos, old_name
         self.contents = json.dumps(records)
 
         self.setContentType("application/json; charset=UTF-8")
-        return self.contents.encode(encoding='UTF-8')
+        return self.contents.encode('UTF-8')
