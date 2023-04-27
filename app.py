@@ -1,7 +1,7 @@
 import mimetypes
 import os
 from flask import Flask, send_from_directory
-from response.dataHandler import getData
+from dataHandler import getData
 # from markupsafe import escape
 
 mimetypes.add_type('application/javascript', '.js')
