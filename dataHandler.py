@@ -1,29 +1,31 @@
-import sqlite3
-from sqlite3 import Error
+import functools, sqlite3
+from flask import abort
 
-def _connect():
-    conn = None
-    try:
-        conn = sqlite3.connect('data/streets.db')
-    except Error as e:
-         print(e)
-    return conn
+def connect_db(func: callable) -> callable:
+    @functools.wraps(func)
+    def wrapper_db(*args, **kwargs) -> any:
+        try:
+            with sqlite3.connect('data/streets.db') as db:
+                return func(db, *args, **kwargs)
+        except sqlite3.Error as e:
+            print(e)
+            abort(500)
+    return wrapper_db
 
-_sql = '''
-select
-    id, pos, objtype, old_name, new_name, rename_date, applied
-from streets
-order by pos, old_name
-'''
-
-def getData():
+@connect_db
+def getData(db: sqlite3.Connection) -> list:
+    selectAllSql = '''
+    select
+        id, pos, objtype, old_name, new_name, rename_date, applied
+    from streets
+    order by pos, old_name
+    '''
     records = []
-    with _connect() as conn:
-        cur = conn.cursor()
-        cur.execute(_sql)
-        names = [description[0] for description in cur.description]
-        rows = cur.fetchall()
-        for row in rows:
-            rec = {n: row[names.index(n)] for n in names}
-            records.append(rec)
+    cur = db.cursor()
+    cur.execute(selectAllSql)
+    names = [description[0] for description in cur.description]
+    rows = cur.fetchall()
+    for row in rows:
+        rec = {n: row[names.index(n)] for n in names}
+        records.append(rec)
     return records

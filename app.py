@@ -1,6 +1,6 @@
 import mimetypes
 import os
-from flask import Flask, send_from_directory
+from flask import Flask, render_template, send_from_directory
 from dataHandler import getData
 # from markupsafe import escape
 
@@ -13,6 +13,10 @@ app = Flask(__name__, static_url_path='/')
 def index():
     return send_from_directory(os.path.join(app.root_path, 'static'),
         'index.html', mimetype='text/html')
+
+@app.route('/without_filter')
+def without_filter():
+    return render_template('streets.html', data=getData())
 
 @app.route('/data')
 def get_data():

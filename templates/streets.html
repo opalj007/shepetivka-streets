@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Вулиці</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/index.6283a5dc.css">
+</head>
+<body>
+    <h1>Перейменовані топонімічні об'єкти</h1>
+    <table class="table table-striped" id="streets">
+        <thead>
+            <tr>
+                <th>Населений пункт</th>
+                <th>Об&apos;єкт</th>
+                <th>Стара назва</th>
+                <th>Нова назва</th>
+                <th>Дата зміни</th>
+                <th>Змінено в БД</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in data %}
+            <tr class="table-secondary">
+                <td> {{ row.pos }} </td>
+                <td> {{ row.objtype }} </td>
+                <td> {{ row.old_name }} </td>
+                <td> {{ row.new_name }} </td>
+                <td> {{ row.rename_date }} </td>
+                <td> {% if row.applied %} Yes {% else %} No {% endif %}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

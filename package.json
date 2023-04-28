@@ -10,7 +10,7 @@
   },
   "browserslist": "> 0.5%, last 2 versions, not dead",
   "scripts": {
-    "start": "parcel src/index.html",
+    "start": "parcel --dist-dir static src/index.html",
     "clean": "rm -rf static && mkdir static",
     "copy-assets": "cp -r assets/* static/",
     "build": "npm run clean && npm run copy-assets && parcel build",
