@@ -1,5 +1,4 @@
-import mimetypes
-import os
+import glob, mimetypes, os
 from flask import Flask, render_template, send_from_directory
 from dataHandler import getData
 # from markupsafe import escape
@@ -16,7 +15,9 @@ def index():
 
 @app.route('/without_filter')
 def without_filter():
-    return render_template('streets.html', data=getData())
+    css_files = glob.glob(os.path.join(app.static_folder, 'index.*.css'))
+    latest_css = os.path.basename(max(css_files, key=os.path.getctime))
+    return render_template('streets.html', css_file='/'+latest_css, data=getData())
 
 @app.route('/data')
 def get_data():
