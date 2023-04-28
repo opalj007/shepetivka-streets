@@ -29,7 +29,7 @@ export default function () {
     return (
         <>
 <h1>Перейменовані топонімічні об'єкти <button type="button" className="btn btn-primary" onClick={toggleMode}>{ modesToShow[mode] }</button></h1>
-{ mode === 'table' ? <StreetTable data={ data } /> : <Form/> }
+{ mode === 'table' ? <StreetTable data={ data } /> : <Form data={ data } /> }
         </>
     );
 }
