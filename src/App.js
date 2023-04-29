@@ -7,8 +7,8 @@ export default function () {
         table: 'Форма',
         form: 'Таблиця'
     }
-    const initialMode  = window.innerWidth > 1080 ? 'table': 'form';
-    // const initialMode = 'form';
+    // const initialMode  = window.innerWidth > 1080 ? 'table': 'form';
+    const initialMode = 'form';
     const [mode, setMode] = useState(initialMode);
     const [data, setData] = useState([]);
 

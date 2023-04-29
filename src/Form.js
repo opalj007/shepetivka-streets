@@ -1,15 +1,28 @@
+import { useState } from "react";
+
 export default function (props) {
+    const filterLabes = {
+        pos: 'Населений пункт',
+        objtype: "Об'єкт",
+        old_name: 'Стара назва',
+        new_name: 'Нова назва'
+    }
+
+    const [filter, setFilter] = useState({
+        pos: '',
+        objtype: '',
+        old_name: '',
+        new_name: ''
+    });
 
     return (
-<div className="container-sm">
-    <div class="mb-3">
-    <label for="exampleFormControlInput1" class="form-label">Email address</label>
-    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com"/>
-    </div>
-    <div class="mb-3">
-    <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
-    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-    </div>
+<div className="container-sm" id="streets-form">
+    {Object.keys(filter).map( key => (
+        <div className="mb-3" key={key}>
+            <label for={key} className="form-label">{ filterLabes[key] }</label>
+            <input type="text" className="form-control" id={key} name={key}/>
+        </div>
+    )) }
 </div>
     );
 }
