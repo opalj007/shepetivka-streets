@@ -1,11 +1,12 @@
-import functools, sqlite3
+import functools, os, sqlite3
 from flask import abort
 
 def connect_db(func: callable) -> callable:
     @functools.wraps(func)
     def wrapper_db(*args, **kwargs) -> any:
+        db_path = os.path.join(os.path.realpath(os.path.dirname(__file__)), 'data', 'streets.db')
         try:
-            with sqlite3.connect('data/streets.db') as db:
+            with sqlite3.connect(db_path) as db:
                 return func(db, *args, **kwargs)
         except sqlite3.Error as e:
             print(e)

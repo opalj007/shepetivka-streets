@@ -5,14 +5,14 @@
   "source": "src/index.html",
   "targets": {
     "default": {
-      "distDir": "./static"
+      "distDir": "./flask-app/static"
     }
   },
   "browserslist": "> 0.5%, last 2 versions, not dead",
   "scripts": {
-    "start": "parcel --dist-dir static src/index.html",
-    "clean": "rm -rf static && mkdir static",
-    "copy-assets": "cp -r assets/* static/",
+    "start": "parcel --dist-dir flask-app/static src/index.html",
+    "clean": "rm -rf flask-app/static && mkdir flask-app/static",
+    "copy-assets": "cp -r assets/* flask-app/static/",
     "build": "npm run clean && npm run copy-assets && parcel build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
