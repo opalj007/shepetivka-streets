@@ -1,0 +1,10 @@
+services:
+  web:
+    build: .
+    command: flask --app flask-app/app.py run --host=0.0.0.0 --port=5000 --debug
+    environment:
+      - DEBUG=True
+    ports:
+      - '5000:5000'
+    volumes:
+      - ./:/opt/streets:delegated

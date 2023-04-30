@@ -19,7 +19,7 @@ export default function (props) {
 <div className="container-sm" id="streets-form">
     {Object.keys(filter).map( key => (
         <div className="mb-3" key={key}>
-            <label for={key} className="form-label">{ filterLabes[key] }</label>
+            <label htmlFor={key} className="form-label">{ filterLabes[key] }</label>
             <input type="text" className="form-control" id={key} name={key}/>
         </div>
     )) }
