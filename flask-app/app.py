@@ -16,8 +16,8 @@ def index():
 @app.route('/without_filter')
 def without_filter():
     css_files = glob.glob(os.path.join(app.static_folder, 'index.*.css'))
-    latest_css = os.path.basename(max(css_files, key=os.path.getctime))
-    return render_template('streets.html', css_file='/'+latest_css, data=data.getAll())
+    latest_css = '/' + os.path.basename(max(css_files, key=os.path.getctime))
+    return render_template('streets.html', css_file=latest_css, data=data.getAll())
 
 @app.route('/data')
 def get_data():
