@@ -82,11 +82,6 @@ export default function (props) {
                 <label htmlFor={key} className="form-label">{ filterLabels[key] }</label>
                 <input type="text" className="form-control" id={key} name={key} value={filter[key]} onChange={performFilter}/>
             </div>
-            {/* <ul className="list-group">
-                { extractFilteredData(key).map( row => (
-                    <li key={row.id} className="list-group-item">{ row.field }</li>
-                )) }
-            </ul> */}
         </div>
     )) }
     { showFilteredData().length > 0 && (<h6 className="mt-3">Знайдено</h6>)}
