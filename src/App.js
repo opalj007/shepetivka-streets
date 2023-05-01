@@ -7,18 +7,22 @@ export default function () {
         table: 'Форма',
         form: 'Таблиця'
     }
-    // const initialMode  = window.innerWidth > 1080 ? 'table': 'form';
-    const initialMode = 'form';
+    const initialMode  = window.innerWidth > 1080 ? 'table': 'form';
+    // const initialMode = 'form';
     const [mode, setMode] = useState(initialMode);
     const [data, setData] = useState([]);
 
 
     useEffect( () => {
-        fetch('/data')
-        .then( response => response.json() )
-        .then( records => {
-            setData(records);
-        });
+        (async () => {
+            try {
+                const records = await (await fetch('/json/data')).json();
+                setData(records);
+            } catch (err) {
+                console.error(err);
+                alert('Виникла помилка!');
+            }
+        })();
     }, []);
 
     const toggleMode = () => {

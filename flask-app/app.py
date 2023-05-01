@@ -19,23 +19,23 @@ def without_filter():
     latest_css = '/' + os.path.basename(max(css_files, key=os.path.getctime))
     return render_template('streets.html', css_file=latest_css, data=data.getAll())
 
-@app.route('/data')
+@app.route('/json/data')
 def get_data():
     return data.getAll()
 
-@app.route('/settlements')
+@app.route('/json/settlements')
 def get_settlements():
     return data.getSettlements()
 
-@app.route('/object_types')
+@app.route('/json/object-types')
 def get_object_types():
     return data.getObjectTypes()
 
-@app.route('/old_names')
+@app.route('/json/old-names')
 def get_old_names():
     return data.getOldNames()
 
-@app.route('/new_names')
+@app.route('/json/new-names')
 def get_new_names():
     return data.getNewNames()
 
