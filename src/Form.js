@@ -2,33 +2,24 @@ import { useState, useEffect } from "react";
 
 export default function (props) {
     const [dicts, setDicts] = useState({
-        pos: [],
-        objtype: [],
-        old_name: [],
-        new_name: []
+        pos: [{pos: ''}],
+        objtype: [{objtype: ''}]
     });
 
     useEffect( () => {
-        fetchData('pos', '/json/settlements');
-        fetchData('objtype', '/json/object-types');
-        fetchData('old_name', '/json/old-names');
-        fetchData('new_name', '/json/new-names');
-    }, []);
-
-    async function fetchData(dict, url) {
-        try {
-            const response = await fetch(url);
-            const records = await response.json();
-            records.unshift({pos: ''});
+        Object.keys(dicts).map( field => {
+            const unique = [...new Set(props.data.map( row => row[field]))];
+            const records = unique.map( item => {
+                const obj = {};
+                obj[field] = item;
+                return obj;
+            });
             setDicts( previousState => {
-                previousState[dict] = records;
+                previousState[field] = [...previousState[field], ...records];
                 return { ...previousState };
             });
-        } catch (err) {
-            console.error(err);
-            alert('Виникла помилка!');
-        }
-    }
+        });
+    }, []);
 
     const [filter, setFilter] = useState({
         pos: 'м. Шепетівка',
@@ -42,12 +33,12 @@ export default function (props) {
         old_name: 'Стара назва',
         new_name: 'Нова назва'
     }
+
     function performFilter( {target} ) {
         const name = target.getAttribute('id');
         setFilter( previousState => {
             previousState[name] = target.value;
-            // return previousState; - this doesn't work
-            return { ...previousState }; // this works
+            return { ...previousState };
         });
     }
 
@@ -63,17 +54,17 @@ export default function (props) {
         }));
     }, [filter]);
 
-    function extractFilteredData(attr) {
+    function showFilteredData() {
         return (filter.old_name.length > 3) || (filter.new_name.length > 3) ? filtered.map( item => ({
-            id: attr + '-' + filtered.indexOf(item).toString(),
-            field: item[attr]
+            id: filtered.indexOf(item).toString(),
+            text: item.pos + ': ' + item.objtype + ' ' + item.old_name + ' -> ' + item.new_name
         })) : [];
     }
 
     return (
 <div className="container-sm" id="streets-form">
     { ['pos', 'objtype'].map( key =>(
-        <div className="py-3" key={key}>
+        <div className="pt-2" key={key}>
             <div>
                 <label htmlFor={key}>{ filterLabels[key] }</label>
                 <select className="form-select form-select-lg mb-3" id={key} value={filter[key]} onChange={performFilter}>
@@ -82,28 +73,28 @@ export default function (props) {
                 )) }
                 </select>
             </div>
-            <ul className="list-group">
-                { ! filter[key] && extractFilteredData(key).map( row => (
-                    <li key={row.id} className="list-group-item">{ row.field }</li>
-                    )) }
-            </ul>
         </div>
     )) }
 
     { ['old_name', 'new_name'].map( key => (
-        <div className="pt-3" key={key}>
+        <div className="pt-2" key={key}>
             <div>
                 <label htmlFor={key} className="form-label">{ filterLabels[key] }</label>
                 <input type="text" className="form-control" id={key} name={key} value={filter[key]} onChange={performFilter}/>
             </div>
-            <ul className="list-group">
+            {/* <ul className="list-group">
                 { extractFilteredData(key).map( row => (
                     <li key={row.id} className="list-group-item">{ row.field }</li>
                 )) }
-            </ul>
+            </ul> */}
         </div>
     )) }
-    <div>&nbsp;</div>
+    { showFilteredData().length > 0 && (<h6 className="mt-3">Знайдено</h6>)}
+    <ul className="list-group py-3">
+    { showFilteredData().map( row => (
+        <li key={row.id} className="list-group-item">{ row.text }</li>
+    )) }
+    </ul>
 </div>
     );
 }

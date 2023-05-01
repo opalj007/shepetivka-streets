@@ -7,16 +7,16 @@ export default function () {
         table: 'Форма',
         form: 'Таблиця'
     }
-    const initialMode  = window.innerWidth > 1080 ? 'table': 'form';
+    const initialMode  = window.innerWidth > 1080 ? 'table' : 'form';
     // const initialMode = 'form';
     const [mode, setMode] = useState(initialMode);
     const [data, setData] = useState([]);
 
-
     useEffect( () => {
         (async () => {
             try {
-                const records = await (await fetch('/json/data')).json();
+                const response = await fetch('/json/data');
+                const records = await response.json();
                 setData(records);
             } catch (err) {
                 console.error(err);
