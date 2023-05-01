@@ -5,7 +5,7 @@
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
     <meta content="utf-8" http-equiv="encoding">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Вулиці</title>
+    <title>Вулиці Шепетівки</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{{ url_for('static', filename=css_file) }}">
 </head>
@@ -20,7 +20,6 @@
                     <th>Стара назва</th>
                     <th>Нова назва</th>
                     <th>Дата зміни</th>
-                    <th>Змінено в БД</th>
                 </tr>
             </thead>
             <tbody>
@@ -31,7 +30,6 @@
                     <td> {{ row.old_name }} </td>
                     <td> {{ row.new_name }} </td>
                     <td> {{ row.rename_date }} </td>
-                    <td> {% if row.applied %} Yes {% else %} No {% endif %}</td>
                 </tr>
                 {% endfor %}
             </tbody>

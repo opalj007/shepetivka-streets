@@ -27,7 +27,6 @@ export default function (props) {
                 <th>Стара назва</th>
                 <th>Нова назва</th>
                 <th>Дата зміни</th>
-                <th>Змінено в БД</th>
             </tr>
         </thead>
         <tbody>
@@ -50,7 +49,6 @@ export default function (props) {
                     <td> {row.old_name} </td>
                     <td> {row.new_name} </td>
                     <td> {row.rename_date} </td>
-                    <td> { row.applied ? 'Yes' : 'No' } </td>
                 </tr>
             )) }
         </tbody>
