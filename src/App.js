@@ -15,7 +15,7 @@ export default function () {
     useEffect( () => {
         (async () => {
             try {
-                const response = await fetch('/json/data');
+                const response = await fetch('/streets.json');
                 const records = await response.json();
                 setData(records);
             } catch (err) {

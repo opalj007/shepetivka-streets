@@ -3,18 +3,14 @@
   "version": "2.0.0",
   "description": "Browse renamed streets",
   "source": "src/index.html",
-  "targets": {
-    "default": {
-      "distDir": "./flask-app/static"
-    }
-  },
   "browserslist": "> 0.5%, last 2 versions, not dead",
   "scripts": {
-    "start": "parcel --dist-dir flask-app/static src/index.html",
-    "clean": "rm -rf flask-app/static",
-    "create-dist": "mkdir flask-app/static/",
-    "copy-assets": "cp -r assets/* flask-app/static/",
-    "build": "npm run clean && npm run create-dist && npm run copy-assets && parcel build",
+    "start": "parcel src/index.html",
+    "clean": "rm -rf dist",
+    "create-dist": "mkdir dist",
+    "copy-assets": "cp -r assets/* dist/",
+    "copy-db": "node copy-db.js",
+    "build": "npm run clean && npm run create-dist && npm run copy-assets && npm run copy-db && parcel build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Oleksandr Palianytsia",
@@ -23,7 +19,9 @@
     "@parcel/transformer-sass": "^2.8.3",
     "http-proxy-middleware": "^2.0.6",
     "parcel": "^2.8.3",
-    "process": "^0.11.10"
+    "process": "^0.11.10",
+    "sqlite": "^4.2.0",
+    "sqlite3": "^5.1.6"
   },
   "dependencies": {
     "bootstrap": "^5.2.3",
