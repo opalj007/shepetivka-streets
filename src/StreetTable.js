@@ -32,7 +32,7 @@ export default function (props) {
         <tbody>
             <tr className="table-primary" id="filter">
                 { Object.keys(filter).map( key => (
-                    <td key={key}><input className="form-control" name={key} type="text" value={filter[key]} onChange={performFilter} /></td>
+                    <td key={key}><input className="form-control" name={key} type="text" placeholder="друкуйте..." value={filter[key]} onChange={performFilter} /></td>
                 )) }
                 <td colSpan={2}></td>
             </tr>
