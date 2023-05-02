@@ -1,0 +1,30 @@
+{
+  "name": "streets",
+  "version": "2.0.0",
+  "description": "Browse renamed streets",
+  "source": "src/index.html",
+  "browserslist": "> 0.5%, last 2 versions, not dead",
+  "scripts": {
+    "start": "parcel src/index.html",
+    "clean": "rm -rf dist",
+    "create-dist": "mkdir dist",
+    "copy-assets": "cp -r assets/* dist/",
+    "copy-db": "node copy-db.js",
+    "build": "npm run clean && npm run create-dist && npm run copy-assets && npm run copy-db && parcel build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Oleksandr Palianytsia",
+  "license": "ISC",
+  "devDependencies": {
+    "@parcel/transformer-sass": "^2.8.3",
+    "parcel": "^2.8.3",
+    "process": "^0.11.10",
+    "sqlite": "^4.2.0",
+    "sqlite3": "^5.1.6"
+  },
+  "dependencies": {
+    "bootstrap": "^5.2.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}

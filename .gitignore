@@ -1,5 +1,6 @@
 __pycache__
 node_modules
+package-lock.json
 .parcel-cache
 dist
 static
