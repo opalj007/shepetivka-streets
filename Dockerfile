@@ -1,21 +1,21 @@
-FROM ubuntu:22.04
+FROM node:18.16.0 as build
 
-RUN apt-get -yqq update
-RUN apt-get -yqq install python3 curl
-RUN curl -sL https://bootstrap.pypa.io/get-pip.py | python3
-RUN curl -sL https://deb.nodesource.com/setup_18.x | bash
-RUN apt-get -yq install nodejs
+WORKDIR /app
 
-WORKDIR /opt/streets
-COPY . .
+ADD ./assets /app/assets
+ADD ./data /app/data
+ADD ./src /app/src
+ADD ./copy-db.js /app/copy-db.js
+ADD ./package.json /app/package.json
 
-# install dependencies
-RUN pip install --no-cache-dir -r requirements.txt
-RUN npm install
+RUN yarn install
+RUN yarn build
 
-RUN npm run build
+FROM nginx
 
-EXPOSE 5000
+ADD ./nginx/nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=build /app/dist/* /usr/share/nginx/html/
 
-# ENTRYPOINT [ "python3", "./flask-app/app.py" ]
-CMD [ "python3", "./flask-app/app.py" ]
+EXPOSE 8080
+
+CMD ["/usr/sbin/nginx"]
