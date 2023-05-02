@@ -1,26 +1,6 @@
 import { useState, useEffect } from "react";
 
 export default function (props) {
-    const [dicts, setDicts] = useState({
-        pos: [{pos: ''}],
-        objtype: [{objtype: ''}]
-    });
-
-    useEffect( () => {
-        Object.keys(dicts).map( field => {
-            const unique = [...new Set(props.data.map( row => row[field]))];
-            const records = unique.map( item => {
-                const obj = {};
-                obj[field] = item;
-                return obj;
-            });
-            setDicts( previousState => {
-                previousState[field] = [...previousState[field], ...records];
-                return { ...previousState };
-            });
-        });
-    }, []);
-
     const [filter, setFilter] = useState({
         pos: 'м. Шепетівка',
         objtype: 'вулиця',
@@ -68,7 +48,7 @@ export default function (props) {
             <div>
                 <label htmlFor={key}>{ filterLabels[key] }</label>
                 <select className="form-select form-select-lg mb-3" id={key} value={filter[key]} onChange={performFilter}>
-                { dicts[key].map( row => (
+                { props.dicts[key].map( row => (
                     <option key={key + '-' + row[key]} value={row[key]}>{ row[key] }</option>
                 )) }
                 </select>
@@ -80,7 +60,7 @@ export default function (props) {
         <div className="pt-2" key={key}>
             <div>
                 <label htmlFor={key} className="form-label">{ filterLabels[key] }</label>
-                <input type="text" className="form-control" id={key} name={key} value={filter[key]} onChange={performFilter}/>
+                <input type="text" className="form-control" id={key} name={key} placeholder="друкуйте..." value={filter[key]} onChange={performFilter}/>
             </div>
         </div>
     )) }

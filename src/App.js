@@ -11,6 +11,10 @@ export default function () {
     // const initialMode = 'form';
     const [mode, setMode] = useState(initialMode);
     const [data, setData] = useState([]);
+    const [dicts, setDicts] = useState({
+        pos: [{pos: ''}],
+        objtype: [{objtype: ''}]
+    });
 
     useEffect( () => {
         (async () => {
@@ -18,6 +22,18 @@ export default function () {
                 const response = await fetch('/streets.json');
                 const records = await response.json();
                 setData(records);
+                Object.keys(dicts).map( field => {
+                    const unique = [...new Set(records.map( row => row[field]))];
+                    const dict_records = unique.map( item => {
+                        const obj = {};
+                        obj[field] = item;
+                        return obj;
+                    });
+                    setDicts( previousState => {
+                        previousState[field] = [...previousState[field], ...dict_records];
+                        return { ...previousState };
+                    });
+                });
             } catch (err) {
                 console.error(err);
                 alert('Виникла помилка!');
@@ -34,7 +50,7 @@ export default function () {
     return (
         <>
 <h1>Перейменовані топонімічні об'єкти <button type="button" className="btn btn-primary" onClick={toggleMode}>{ modesToShow[mode] }</button></h1>
-{ mode === 'table' ? <StreetTable data={ data } /> : <Form data={ data } /> }
+{ mode === 'table' ? <StreetTable data={ data } /> : <Form data={ data } dicts={ dicts } /> }
         </>
     );
 }
